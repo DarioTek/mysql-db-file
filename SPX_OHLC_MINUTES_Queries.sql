@@ -21,6 +21,12 @@ select date(Datetime), count(*) from dariotek.SPX_OHLC_MINUTES
 GROUP BY date(Datetime)
 ORDER BY date(Datetime);
 
+# Select all unique date from datetime
+select distinct date(Datetime) from dariotek.SPX_OHLC_MINUTES ORDER BY date(Datetime);
 
+# Count of all unique dates collected in the database
+select count(distinct date(Datetime)) from dariotek.SPX_OHLC_MINUTES ORDER BY date(Datetime);
+
+# Select records between certain datetime
 SELECT * FROM dariotek.SPX_OHLC_MINUTES 
 WHERE Datetime BETWEEN '2023-11-09 09:30:00' AND '2023-11-09 10:30:00';
