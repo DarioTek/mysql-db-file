@@ -1,3 +1,5 @@
 use dariotek;
 
+SELECT count(*) FROM dariotek.SPX_OHLC_DAILY;
+
 SELECT * FROM dariotek.SPX_OHLC_DAILY WHERE (Date BETWEEN '2010-01-01' AND '2010-12-31');
