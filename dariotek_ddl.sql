@@ -1,5 +1,10 @@
+DROP SCHEMA IF EXISTS `dariotek`;
+
+CREATE SCHEMA `dariotek`;
+
 /* Use dariotek schema */
-use dariotek;
+use `dariotek`;
+
 
 CREATE TABLE `SPX_OHLC_MINUTES` (
   `Datetime` timestamp NOT NULL,
@@ -10,7 +15,7 @@ CREATE TABLE `SPX_OHLC_MINUTES` (
   `Adj_Close` decimal(16,6) NOT NULL,
   `Volume` decimal(10,0) NOT NULL,
   PRIMARY KEY (`Datetime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `SPX_OHLC_DAILY` (
   `Date` date NOT NULL,
@@ -21,4 +26,4 @@ CREATE TABLE `SPX_OHLC_DAILY` (
   `Adj_Close` decimal(16,6) NOT NULL,
   `Volume` decimal(10,0) NOT NULL,
   PRIMARY KEY (`Date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
