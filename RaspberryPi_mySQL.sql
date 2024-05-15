@@ -11,7 +11,18 @@ select * from SPX_OHLC_MINUTES;
 /*
  * Generic select all records from OHLC_MINUTES
  */
-select * from OHLC_MINUTES;
+select count(*) from OHLC_MINUTES;
+
+select count(distinct Ticker) from OHLC_MINUTES;
+
+select count(*) from OHLC_MINUTES 
+WHERE Ticker not in ('SPY','QQQ','IWM','DIA','AAPL', 'MSFT', 'GOOGL','TSLA','NVDA','CAT','NFLX','META','GS','BA','MA','LLY','COST');
+
+select DISTINCT Ticker from OHLC_MINUTES 
+WHERE Ticker not in ('SPY','QQQ','IWM','DIA','AAPL', 'MSFT', 'GOOGL','TSLA','NVDA','CAT','NFLX','META','GS','BA','MA','LLY','COST');
+
+select count(DISTINCT Ticker) from OHLC_MINUTES 
+WHERE Ticker not in ('SPY','QQQ','IWM','DIA','AAPL', 'MSFT', 'GOOGL','TSLA','NVDA','CAT','NFLX','META','GS','BA','MA','LLY','COST');
 
 /*
  * check the count of minutes record for each day 
