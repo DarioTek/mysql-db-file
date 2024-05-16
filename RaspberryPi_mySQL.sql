@@ -24,6 +24,26 @@ WHERE Ticker not in ('SPY','QQQ','IWM','DIA','AAPL', 'MSFT', 'GOOGL','TSLA','NVD
 select count(DISTINCT Ticker) from OHLC_MINUTES 
 WHERE Ticker not in ('SPY','QQQ','IWM','DIA','AAPL', 'MSFT', 'GOOGL','TSLA','NVDA','CAT','NFLX','META','GS','BA','MA','LLY','COST');
 
+
+SELECT * FROM OHLC_MINUTES
+WHERE 
+Ticker = 'SPY' AND
+Datetime BETWEEN '2024-05-14' AND '2024-05-15';
+
+SELECT * FROM OHLC_MINUTES
+WHERE 
+Ticker = 'SPY' AND 
+Datetime = CURDATE();
+
+SELECT * FROM SPX_OHLC_MINUTES
+WHERE 
+Datetime = CURDATE();
+
+SELECT CURDATE();
+
+SELECT NOW();
+
+
 /*
  * check the count of minutes record for each day 
  * typically 390 in a full trading day
@@ -49,9 +69,17 @@ SELECT COUNT(DISTINCT date(Datetime)) as UNIQUE_DATES FROM SPX_OHLC_MINUTES;
 /*
  * Select records for a particular day
  */
-select * from SPX_OHLC_MINUTES where date(Datetime) >= '2024-05-02';
+select * from SPX_OHLC_MINUTES where date(Datetime) >= '2024-05-15';
 
-select * from OHLC_MINUTES;
+select * from SPX_OHLC_MINUTES where date(Datetime) >= CURDATE();
+
+select DISTINCT Ticker from OHLC_MINUTES where date(Datetime) >= CURDATE();
+
+
+
+SELECT CURDATE();
+
+SELECT NOW();
 
 /*
  * Show the DDL statement to create the table in a different server for example.
