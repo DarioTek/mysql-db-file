@@ -3,9 +3,15 @@
  */
 use financedb;
 
-select count(*) from SPX_OHLC_MINUTES where date(Datetime) >= CURDATE();
 
-select Ticker, count(*) from OHLC_MINUTES where date(Datetime) >= CURDATE();
+select date(Datetime), count(*) from SPX_OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
+GROUP BY date(Datetime)
+ORDER BY date(Datetime);
+
+
+SELECT Ticker, date(Datetime), count(*) FROM OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
+GROUP BY Ticker, date(Datetime)
+ORDER BY Ticker, date(Datetime);
 
 /*
  * Generic select all records from SPX_OHLC_MINUTES
@@ -58,15 +64,6 @@ GROUP BY date(Datetime)
 ORDER BY date(Datetime);
 
 select Ticker, date(Datetime), count(*) from OHLC_MINUTES
-GROUP BY Ticker, date(Datetime)
-ORDER BY Ticker, date(Datetime);
-
-select date(Datetime), count(*) from SPX_OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
-GROUP BY date(Datetime)
-ORDER BY date(Datetime);
-
-
-SELECT Ticker, date(Datetime), count(*) FROM OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
 GROUP BY Ticker, date(Datetime)
 ORDER BY Ticker, date(Datetime);
 
