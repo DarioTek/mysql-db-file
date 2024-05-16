@@ -4,12 +4,12 @@
 use financedb;
 
 
-select date(Datetime), count(*) from SPX_OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
+select 'SPX' as Ticker, date(Datetime) as Date, count(*) as count from SPX_OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
 GROUP BY date(Datetime)
 ORDER BY date(Datetime);
 
 
-SELECT Ticker, date(Datetime), count(*) FROM OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
+SELECT Ticker, date(Datetime) as Date, count(*) as count FROM OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
 GROUP BY Ticker, date(Datetime)
 ORDER BY Ticker, date(Datetime);
 
