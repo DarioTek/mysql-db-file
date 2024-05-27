@@ -131,3 +131,36 @@ SHOW KEYS FROM SPX_OHLC_MINUTES WHERE Key_name = 'PRIMARY';
  * set the SQL_SAFE_UPDATES = 0 in RaspberryPi MySQL iand set it back SQL_SAFE_UPDATES = 1 after deletes
  */
 #SET SQL_SAFE_UPDATES = 1;
+
+/*
+ * Create CONFIG table
+ */
+CREATE TABLE CONFIG (
+    id INT AUTO_INCREMENT,
+    `ATTRIBUTE` VARCHAR(255) NOT NULL,
+    `VALUE` VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+select * from CONFIG;
+
+rollback;
+
+INSERT INTO CONFIG (`ATTRIBUTE`, `VALUE`)
+VALUES ('access_token', 'XXXX');
+
+INSERT INTO CONFIG (`ATTRIBUTE`, `VALUE`)
+VALUES ('refresh_token', 'XXXX');
+
+
+INSERT INTO CONFIG (`ATTRIBUTE`, `VALUE`)
+VALUES ('app_key', 'TEZKIUQuEBleTxfE');
+
+INSERT INTO CONFIG (`ATTRIBUTE`, `VALUE`)
+VALUES ('app_secret', 'TEZKIUQuEBleTxfE');
+
+commit;
+
+UPDATE CONFIG
+SET `VALUE` = 'app_key'
+WHERE `ATTRIBUTE` = 'exampleKey';
