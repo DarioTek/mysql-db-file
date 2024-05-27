@@ -3,6 +3,8 @@
  */
 use financedb;
 
+select * from DAILY_NET_BALANCE;
+
 select 'SPX' as Ticker, date(Datetime) as Date, count(*) as count from SPX_OHLC_MINUTES WHERE date(Datetime) >= CURDATE()
 GROUP BY date(Datetime)
 ORDER BY date(Datetime);
@@ -136,10 +138,9 @@ SHOW KEYS FROM SPX_OHLC_MINUTES WHERE Key_name = 'PRIMARY';
  * Create CONFIG table
  */
 CREATE TABLE CONFIG (
-    id INT AUTO_INCREMENT,
     `ATTRIBUTE` VARCHAR(255) NOT NULL,
     `VALUE` VARCHAR(255),
-    PRIMARY KEY (id)
+    PRIMARY KEY (ATTRIBUTE)
 );
 
 select * from CONFIG;
@@ -154,7 +155,7 @@ VALUES ('refresh_token', 'XXXX');
 
 
 INSERT INTO CONFIG (`ATTRIBUTE`, `VALUE`)
-VALUES ('app_key', 'TEZKIUQuEBleTxfE');
+VALUES ('app_key', 'OFEkYRyfCCk7W79SL90KrPjWtOElBs7E');
 
 INSERT INTO CONFIG (`ATTRIBUTE`, `VALUE`)
 VALUES ('app_secret', 'TEZKIUQuEBleTxfE');
@@ -164,3 +165,10 @@ commit;
 UPDATE CONFIG
 SET `VALUE` = 'app_key'
 WHERE `ATTRIBUTE` = 'exampleKey';
+
+
+CREATE TABLE DAILY_NET_BALANCE (
+    RECORD_DATE DATE,
+    LIQUIDITY_VALUE DECIMAL(10, 2)
+);
+
