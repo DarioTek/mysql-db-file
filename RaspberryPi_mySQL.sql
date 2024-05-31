@@ -5,6 +5,16 @@ use financedb;
 
 select * from DAILY_BALANCE WHERE date(RECORD_DATE) = CURDATE();
 
+select* from ACCOUNT;
+
+select * from POSITION ORDER BY SYMBOL;
+
+select count(*) from POSITION;
+
+select ACCOUNT_NUMBER, count(*) from POSITION GROUP BY ACCOUNT_NUMBER;
+
+select sum(liquidity_value) from DAILY_BALANCE WHERE date(RECORD_DATE) = CURDATE();
+
 select * from DAILY_BALANCE;
 
 select LIQUIDITY_VALUE as LIQUIDITY_VALUE_AM from DAILY_NET_BALANCE WHERE RECORD_DATE = (select MIN(RECORD_DATE) from DAILY_NET_BALANCE WHERE date(RECORD_DATE) = CURDATE()
@@ -33,6 +43,8 @@ ORDER BY Ticker, date(Datetime);
  * Generic select all records from SPX_OHLC_MINUTES
  */
 select * from SPX_OHLC_MINUTES;
+
+select count(*) from SPX_OHLC_MINUTES;
 
 /*
  * Generic select all records from OHLC_MINUTES
@@ -173,8 +185,6 @@ commit;
 UPDATE CONFIG
 SET `VALUE` = 'app_key'
 WHERE `ATTRIBUTE` = 'exampleKey';
-
-
 
 
 select * from DAILY_NET_CHANGE;
