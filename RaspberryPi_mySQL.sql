@@ -5,6 +5,9 @@ use financedb;
 
 select * from DAILY_BALANCE WHERE date(RECORD_DATE) = CURDATE();
 
+SELECT * FROM DAILY_BALANCE WHERE date(RECORD_DATE) = (SELECT max(RECORD_DATE) FROM DAILY_BALANCE);
+
+
 select* from ACCOUNT;
 
 select * from POSITION ORDER BY SYMBOL;
