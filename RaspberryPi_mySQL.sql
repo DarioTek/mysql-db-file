@@ -45,7 +45,7 @@ ORDER BY Ticker, date(Datetime);
 /*
  * Generic select all records from SPX_OHLC_MINUTES
  */
-select * from SPX_OHLC_MINUTES;
+select * from SPX_OHLC_MINUTES ORDER BY DATETIME DESC;
 
 select * from SPX_OHLC_MINUTES where DATE(Datetime) = curdate();
 
