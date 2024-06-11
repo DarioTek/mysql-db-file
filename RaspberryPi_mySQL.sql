@@ -9,7 +9,7 @@ select * from POSITION ORDER BY RECORD_DATE DESC;
 
 select * from POSITION ORDER BY SYMBOL;
 
-select count(*) from POSITION;
+select count(*) from POSITION WHERE date(RECORD_DATE) = CURDATE();
 
 select ACCOUNT_NUMBER, count(*) from POSITION GROUP BY ACCOUNT_NUMBER;
 
