@@ -3,7 +3,9 @@
  */
 use financedb;
 
-select* from ACCOUNT;
+select* from ACCOUNT ORDER BY RECORD_DATE DESC;
+
+select * from POSITION ORDER BY RECORD_DATE DESC;
 
 select * from POSITION ORDER BY SYMBOL;
 
