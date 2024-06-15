@@ -44,6 +44,8 @@ ORDER BY Ticker, date(Datetime);
  */
 select * from SPX_OHLC_MINUTES ORDER BY DATETIME DESC;
 
+select count(*) from SPX_OHLC_MINUTES;
+
 select * from SPX_OHLC_MINUTES where DATE(Datetime) = curdate();
 
 select max(datetime) from SPX_OHLC_MINUTES;
