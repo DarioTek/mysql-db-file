@@ -149,3 +149,5 @@ FROM POSITION_VIEW WHERE date(RECORD_DATE) = CURDATE()
 GROUP BY ACCOUNT_NUMBER;
 
 select count(*) from POSITION_VIEW;
+
+use financedb;
