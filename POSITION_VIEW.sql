@@ -129,7 +129,10 @@ WHERE
 /* 
  * QUERY FOR POSITION_VIEW
  */ 
-select count(*) from POSITION_VIEW;
+
+SELECT COUNT(*) FROM POSITION; #1597
+
+select count(*) from POSITION_VIEW; #1597
 
 select count(*) from POSITION WHERE DATE(RECORD_DATE) = CURDATE();
 
