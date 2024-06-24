@@ -124,6 +124,7 @@ WHERE
     P.RECORD_DATE    = C.RECORD_DATE    AND
     P.ACCOUNT_NUMBER = PR.ACCOUNT_NUMBER AND
     P.RECORD_DATE    = PR.RECORD_DATE;
+    
 
 
 /* 
@@ -153,4 +154,3 @@ GROUP BY ACCOUNT_NUMBER;
 
 select count(*) from POSITION_VIEW;
 
-use financedb;
