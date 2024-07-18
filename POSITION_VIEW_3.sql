@@ -156,9 +156,11 @@ SHOW VARIABLES LIKE 'interactive_timeout';
 /*
  * use hint
  */
-select /*+ MAX_EXECUTION_TIME(1000000) */ * from POSITION_VIEW_TEST;
+select /*+ MAX_EXECUTION_TIME(1000000) */ * from POSITION_VIEW;
 
-select count(*) from POSITION_VIEW_TEST;
+select * from POSITION_VIEW WHERE UNDERLYING_SYMBOL = 'TSLA';
+
+select count(*) from POSITION_VIEW;
 
 
 CREATE INDEX idx_position_symbol ON POSITION (SYMBOL);
