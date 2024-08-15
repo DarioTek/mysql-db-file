@@ -52,8 +52,11 @@ LEFT JOIN
 ON 
     T.ACTIVITY_ID = TOD.ACTIVITY_ID;
 
+########################################################
 
-SELECT * FROM TRANSACTIONS_VIEW; 
+use financedb;
+
+SELECT * FROM TRANSACTIONS_VIEW order by RECORD_TIME DESC; 
 
 SELECT COUNT(*) FROM TRANSACTIONS_VIEW; # 4178
 
