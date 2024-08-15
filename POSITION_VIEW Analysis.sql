@@ -1,9 +1,11 @@
 use financedb;
 
-select * from POSITION_VIEW;
+SELECT * FROM POSITION_VIEW;
 
-
-select
+/*
+ * Select all relevant columns for analysis
+ */
+SELECT
 	RECORD_DATE,
 	ACCOUNT_DESCRIPTION,
 	AVERAGE_PRICE,
@@ -27,5 +29,7 @@ select
     THETA,
     RHO,
     VEGA
-from 
-	POSITION_VIEW;
+FROM 
+	POSITION_VIEW
+ORDER BY 
+	DAYS_TO_EXPIRATION;
