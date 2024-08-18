@@ -3,7 +3,7 @@ use financedb;
 SELECT * FROM POSITION_VIEW;
 
 /*
- * Select all relevant columns for analysis
+ * Select all relevant columns for analysis for a Credit Put Spread Position or any PUT positions
  */
 SELECT
 	RECORD_DATE,
@@ -33,10 +33,47 @@ SELECT
 FROM 
 	POSITION_VIEW
 WHERE
-	ASSET_TYPE = 'OPTION'
+	ASSET_TYPE = 'OPTION' AND
+    PUT_CALL = 'PUT'
 ORDER BY 
 	DAYS_TO_EXPIRATION;
     
+/*
+ * Select all relevant columns for analysis for Covered Call positions or any CALL positions
+ */
+SELECT
+	RECORD_DATE,
+	ACCOUNT_DESCRIPTION,
+	AVERAGE_PRICE,
+    SHORT_QUANTITY,
+	LONG_QUANTITY,
+    ASSET_TYPE,
+    SYMBOL, 
+    UNDERLYING_SYMBOL,
+    POSITION_DESCRIPTION,
+    NET_CHANGE,
+    PUT_CALL,
+    MARKET_VALUE,
+    MAINTENANCE_REQUIREMENT,
+    AVERAGE_SHORT_PRICE,
+    AVERAGE_LONG_PRICE,
+    OPEN_INTEREST,
+    DAYS_TO_EXPIRATION,
+    THEORETICAL_VOLATILITY,
+    VOLATILIY,
+    DELTA,
+    GAMMA,
+    THETA,
+    RHO,
+    VEGA
+FROM 
+	POSITION_VIEW
+WHERE
+	ASSET_TYPE = 'OPTION' AND
+    PUT_CALL = 'CALL'
+ORDER BY 
+	DAYS_TO_EXPIRATION;
+
 
 /*
  * Stocks and ETF positions
@@ -73,3 +110,56 @@ WHERE
 	ASSET_TYPE <> 'OPTION'
 ORDER BY 
 	DAYS_TO_EXPIRATION;
+    
+
+/*
+ * Shows all Distinct SYMBOL in the OPTION_CHAIN_EXP_DATE_MAP table
+ */
+SELECT
+	DISTINCT SYMBOL
+FROM 
+	OPTION_CHAIN_EXP_DATE_MAP;
+
+
+
+SELECT
+	COUNT(*)
+FROM 
+	OPTION_CHAIN_EXP_DATE_MAP;
+
+/*
+ * Create index on the SYMBOL column
+ */
+SET GLOBAL max_allowed_packet = 1073741824;  -- 1GB
+
+CREATE INDEX idx_symbol ON OPTION_CHAIN_EXP_DATE_MAP (SYMBOL);
+
+
+/*
+ * Select the symbol of active positions (e.g AAPL)
+ */
+SELECT 
+	* 
+FROM 
+	POSITION_VIEW 
+WHERE
+	UNDERLYING_SYMBOL = 'AAPL';
+
+# Sample data below
+# 'AAPL  240906P00210000'  
+# 'AAPL  240906P00205000'
+# 'Apple Inc 09/06/2024 $210 Put'
+# 'Apple Inc 09/06/2024 $205 Put'
+
+SELECT
+	*
+FROM 
+	OPTION_CHAIN_EXP_DATE_MAP
+WHERE
+	PUT_CALL = 'PUT' AND
+	SYMBOL = 'AAPL'
+ORDER BY
+	RECORD_DATE DESC;
+    
+
+    
