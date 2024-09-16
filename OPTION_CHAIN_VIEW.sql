@@ -98,3 +98,8 @@ WHERE
 	SYMBOL = '$SPX'
 	#DATE(RECORD_DATE) = '2024-06-26'
 GROUP BY SYMBOL, RECORD_DATE;
+
+/*
+ * OPTION_CHAIN
+ * OPTION_CHAIN_EXP_DATE_MAP - one json path for Call and one for PUT but both data is entered in the same table
+ */
