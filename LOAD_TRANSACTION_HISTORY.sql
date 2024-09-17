@@ -1,0 +1,6 @@
+use financedb;
+
+SELECT 
+	*
+FROM
+	LOAD_TRANSACTION_HISTORY;
