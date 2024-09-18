@@ -7,7 +7,28 @@ SELECT
 	*
 FROM
 	LOAD_TRANSACTION_HISTORY;
-    
+
+
+/*
+ * Sample Option Positions that got Assigned
+ */
+SELECT 
+	*
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+    ACTION = 'Assigned'
+;
+
+/*
+ * Unique Actions
+ */
+SELECT 
+	DISTINCT(ACTION)
+FROM
+	LOAD_TRANSACTION_HISTORY;
+
+
 
 /*
  * Number of transactions for 2024 
@@ -22,8 +43,80 @@ WHERE
 GROUP BY 
 	SOURCE;
 
-
+/*
+ * Sample Vertical Put Spread that was closed
+ */
 SELECT 
 	*
 FROM
-	LOAD_TRANSACTION_HISTORY;
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SYMBOL IN ('META 09/20/2024 450.00 P','META 09/20/2024 475.00 P')
+;
+    
+SELECT 
+	SUM(AMOUNT)
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SYMBOL IN ('META 09/20/2024 450.00 P','META 09/20/2024 475.00 P')
+;
+
+
+/*
+ * Sample Vertical Put Spread that was Expired
+ */
+SELECT 
+	*
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SYMBOL IN ('SPXW 09/16/2024 5300.00 P','SPXW 09/16/2024 5250.00 P')
+;
+    
+SELECT 
+	SUM(AMOUNT)
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SYMBOL IN ('SPXW 09/16/2024 5300.00 P','SPXW 09/16/2024 5250.00 P')
+;
+ 
+
+/*
+ * Sample Put Option Assigned at Expiration for SDIV
+ */
+SELECT 
+	*
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SYMBOL IN ('SDIV 06/21/2024 22.00 P') OR
+    SYMBOL = 'SDIV' AND ACTION = 'Buy' AND RECORD_DATE = '2024/06/24' # Day after the expiration
+;
+ 
+SELECT 
+	*
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SOURCE = 'Dario 2' AND
+	RECORD_DATE = '2024-06-24'
+;
+ 
+
+
+/*
+ * Sample Put Option Assigned at Expiration for TSLA on 8/12/2024
+ */ 
+ SELECT 
+	*
+FROM
+	LOAD_TRANSACTION_HISTORY
+WHERE
+	SOURCE = 'Dario 1' AND
+	RECORD_DATE = '2024-08-12'
+;
+
+'TSLA 08/09/2024 215.00 P'
+
