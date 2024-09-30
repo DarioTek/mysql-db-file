@@ -1,7 +1,7 @@
 use financedb;
 
 /*
- * All Transactions for each of the 4 accounts
+ * All Transaction History for each of the 4 accounts
  */
 SELECT 
 	*
@@ -12,9 +12,33 @@ FROM
 SELECT
 	*
 FROM
+	LOAD_TRANSACTION_HISTORY
+ORDER BY
+	RECORD_DATE DESC;
+
+# 'Dario 1', '2024-09-20', 'Sell to Open', 'NFLX 10/18/2024 600.00 P', 'PUT NETFLIX INC $600 EXP 10/18/24', '1', '4.54', '0.67', '453.33'
+# 'Dario 1', '2024-09-20', 'Buy to Open', 'NFLX 10/18/2024 575.00 P', 'PUT NETFLIX INC $575 EXP 10/18/24', '1', '2.67', '0.66', '-267.66'
+
+/*
+ * Select from the TRANSACTIONS_VIEW tablse
+ */
+SELECT
+	*
+FROM
 	TRANSACTIONS_VIEW
 ORDER BY
 	RECORD_TIME DESC;
+
+SELECT
+	*
+FROM
+	TRANSACTIONS_VIEW
+WHERE 
+	INSTRUMENT_DESCRIPTION in ('NETFLIX INC 10/18/2024 $600 Put','NETFLIX INC 10/18/2024 $575 Put')
+ORDER BY
+	RECORD_TIME DESC;
+
+
 
 /*
  * Sample Option Positions that got Assigned
