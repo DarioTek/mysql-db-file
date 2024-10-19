@@ -84,10 +84,15 @@ WHERE
 #                                        QUERIES FOR OPTION_CHAIN_VIEW                                        #
 ###############################################################################################################
 
-SELECT * FROM OPTION_CHAIN_VIEW;
+SELECT * FROM OPTION_CHAIN_VIEW ORDER BY RECORD_DATE DESC;
 
 SELECT COUNT(*) FROM OPTION_CHAIN_VIEW; # 34,570 rows as of 6/23/2024
 
+/*
+ * The count of option chain records seems to be proportional with the market being up or down.
+ * Hypothesis: If the count is < 10,000 for $SPX means market is experiencing a bearish sentiment,
+ * while a count > 10,000 indicates a bullish sentiment.   
+ */
 SELECT
 	SYMBOL,
 	RECORD_DATE,
@@ -96,8 +101,18 @@ FROM
 	OPTION_CHAIN_VIEW
 WHERE
 	SYMBOL = '$SPX'
-	#DATE(RECORD_DATE) = '2024-06-26'
-GROUP BY SYMBOL, RECORD_DATE;
+GROUP BY SYMBOL, RECORD_DATE 
+ORDER BY RECORD_DATE DESC;
+
+
+SELECT
+	count(*)
+FROM 
+	OPTION_CHAIN_VIEW
+WHERE
+	SYMBOL = '$SPX' AND
+    RECORD_DATE >= '2024-08-20';
+
 
 /*
  * OPTION_CHAIN
