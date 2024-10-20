@@ -99,7 +99,7 @@ SELECT
     P.SETTLED_SHORT_QUANTITY,
     P.ASSET_TYPE,
     P.CUSIP,
-    P.SYMBOL,
+    SUBSTRING_INDEX(P.SYMBOL, ' ', 1) AS SYMBOL,
     P.POSITION_DESCRIPTION,
     P.NET_CHANGE,
     P.POSITION_INSTRUMENT_TYPE,
@@ -240,7 +240,7 @@ SELECT
     P.SETTLED_SHORT_QUANTITY,
     P.ASSET_TYPE,
     P.CUSIP,
-    P.SYMBOL,
+    SUBSTRING_INDEX(P.SYMBOL, ' ', 1) AS SYMBOL,
     P.POSITION_DESCRIPTION,
     P.NET_CHANGE,
     P.POSITION_INSTRUMENT_TYPE,
@@ -425,8 +425,8 @@ SELECT
 FROM 
 	POSITION_VIEW
 WHERE
-	# PUT_CALL = 'PUT' AND
-	DELTA >= 0
+	PUT_CALL = 'CALL' # AND
+	# DELTA >= 0
 ORDER BY 
 	DAYS_TO_EXPIRATION, SYMBOL;
 
@@ -464,4 +464,30 @@ ORDER BY
 
 SELECT * FROM POSITION;
 
-SELECT * FROM UPCOMING_EARNINGS;
+                SELECT
+                    PV.RECORD_DATE,
+                    PV.ACCOUNT_DESCRIPTION,
+                    PV.ASSET_TYPE,
+                    PV.SYMBOL,
+                    PV.POSITION_DESCRIPTION,
+                    PV.PUT_CALL,
+                    PV.SHORT_QUANTITY,
+                    PV.AVERAGE_SHORT_PRICE,
+                    PV.LONG_QUANTITY,
+                    PV.AVERAGE_LONG_PRICE,                    
+                    PV.OPEN_INTEREST,
+                    PV.DAYS_TO_EXPIRATION,
+                    PV.VOLATILIY,
+                    PV.DELTA,
+                    PV.GAMMA,
+                    PV.THETA,
+                    PV.RHO,
+                    PV.VEGA,
+                    WL.EARNINGS_DATE
+                FROM 
+                    POSITION_VIEW PV,
+                    WATCH_LIST WL
+                WHERE
+					PV.SYMBOL = WL.SYMBOL
+                ORDER BY 
+                    DAYS_TO_EXPIRATION, SYMBOL;
